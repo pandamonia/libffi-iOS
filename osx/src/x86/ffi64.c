@@ -536,6 +536,8 @@ ffi_prep_closure_loc (ffi_closure* closure,
   return FFI_OK;
 }
 
+int ffi_closure_unix64_inner(ffi_closure *closure, void *rvalue, struct register_args *reg_args, char *argp);
+
 int
 ffi_closure_unix64_inner(ffi_closure *closure, void *rvalue,
 			 struct register_args *reg_args, char *argp)
