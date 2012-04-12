@@ -1,3 +1,5 @@
+#if !defined(__i386__) && defined(__x86_64__)
+
 /* -----------------------------------------------------------------------
    ffi64.c - Copyright (c) 20011  Anthony Green
              Copyright (c) 2008, 2010  Red Hat, Inc.
@@ -26,8 +28,8 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#include "ffi.h"
-#include "ffi_common.h"
+#include <ffi.h>
+#include <ffi_common.h>
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -37,11 +39,17 @@
 #define MAX_GPR_REGS 6
 #define MAX_SSE_REGS 8
 
+#ifdef __INTEL_COMPILER
+#define UINT128 __m128
+#else
+#define UINT128 __int128_t
+#endif
+
 struct register_args
 {
   /* Registers for argument passing.  */
   UINT64 gpr[MAX_GPR_REGS];
-  __int128_t sse[MAX_SSE_REGS];
+  UINT128 sse[MAX_SSE_REGS];
 };
 
 extern void ffi_call_unix64 (void *args, unsigned long bytes, unsigned flags,
@@ -635,3 +643,6 @@ ffi_closure_unix64_inner(ffi_closure *closure, void *rvalue,
 }
 
 #endif /* __x86_64__ */
+
+
+#endif

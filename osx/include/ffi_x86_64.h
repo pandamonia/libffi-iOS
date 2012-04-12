@@ -1,5 +1,7 @@
+#if !defined(__i386__) && defined(__x86_64__)
+
 /* -----------------------------------------------------------------*-C-*-
-   libffi 3.0.11-rc2 - Copyright (c) 2011 Anthony Green
+   libffi 3.0.11 - Copyright (c) 2011 Anthony Green
                     - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
 
    Permission is hereby granted, free of charge, to any person
@@ -56,96 +58,17 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
-#include <TargetConditionals.h>
 
 /* Specify which architecture libffi is configured for. */
-#if TARGET_OS_MAC || TARGET_IPHONE_SIMULATOR
-	
 #ifndef X86_DARWIN
 #define X86_DARWIN
-#endif
-	
-#define X86_ANY
-	
-#if defined(__i386__)
-
-#define X86
-#undef X86_64
-
-#elif defined(__x86_64__)
-	
-#define X86_64
-#undef X86
-	
-#endif
-
-#else
-	
-#ifndef ARM
-#define ARM
-#endif
-
 #endif
 
 /* ---- System configuration information --------------------------------- */
 
+#include <ffitarget.h>
+
 #ifndef LIBFFI_ASM
-	
-typedef unsigned long          ffi_arg;
-typedef signed long            ffi_sarg;
-
-typedef enum ffi_abi {
-  FFI_FIRST_ABI = 0,
-  FFI_SYSV,
-#if defined(__arm__)
-  FFI_VFP,
-#else
-  FFI_UNIX64,
-#endif
-  FFI_LAST_ABI,
-#if defined(__i386__) || defined(__i386) || defined(__arm__)
-  FFI_DEFAULT_ABI = FFI_SYSV
-#else
-  FFI_DEFAULT_ABI = FFI_UNIX64
-#endif
-} ffi_abi;
-	
-#if defined (__i386__) || defined (__x86_64__)
-
-#define FFI_TYPE_SMALL_STRUCT_1B (FFI_TYPE_LAST + 1)
-#define FFI_TYPE_SMALL_STRUCT_2B (FFI_TYPE_LAST + 2)
-#define FFI_TYPE_SMALL_STRUCT_4B (FFI_TYPE_LAST + 3)
-#define FFI_TYPE_MS_STRUCT       (FFI_TYPE_LAST + 4)
-
-#elif defined(__arm__)
-
-#define FFI_EXTRA_CIF_FIELDS			\
-int vfp_used;					\
-short vfp_reg_free, vfp_nargs;		\
-signed char vfp_args[16]			\
-
-#define FFI_TYPE_STRUCT_VFP_FLOAT  (FFI_TYPE_LAST + 1)
-#define FFI_TYPE_STRUCT_VFP_DOUBLE (FFI_TYPE_LAST + 2)
-	
-#define FFI_TARGET_SPECIFIC_VARIADIC
-
-#endif
-	
-#ifdef __x86_64__
-#define FFI_TRAMPOLINE_SIZE 24
-#define FFI_NATIVE_RAW_API 0
-#elif defined(__i386__)
-#define FFI_TRAMPOLINE_SIZE 10
-#elif defined(__arm__)
-#define FFI_TRAMPOLINE_SIZE 20
-#define FFI_NATIVE_RAW_API 0
-#define FFI_NO_RAW_API 1
-#else
-#error Architecture not supported in this build.
-#endif
-	
-#define FFI_CLOSURES 1
 
 #ifdef _MSC_VER
 #define __attribute__(X)
@@ -272,17 +195,12 @@ FFI_EXTERN ffi_type ffi_type_sint64;
 FFI_EXTERN ffi_type ffi_type_float;
 FFI_EXTERN ffi_type ffi_type_double;
 FFI_EXTERN ffi_type ffi_type_pointer;
-	
-#if TARGET_OS_MAC || TARGET_IPHONE_SIMULATOR
 
+#if 1
 FFI_EXTERN ffi_type ffi_type_longdouble;
-
 #else
-
 #define ffi_type_longdouble ffi_type_double
-
 #endif
-
 #endif /* LIBFFI_HIDE_BASIC_TYPES */
 
 typedef enum {
@@ -381,14 +299,12 @@ size_t ffi_java_raw_size (ffi_cif *cif);
 __declspec(align(8))
 #endif
 typedef struct {
-
-#if TARGET_OS_MAC || TARGET_IPHONE_SIMULATOR
-  char tramp[FFI_TRAMPOLINE_SIZE];
-#else
+#if 0
   void *trampoline_table;
   void *trampoline_table_entry;
+#else
+  char tramp[FFI_TRAMPOLINE_SIZE];
 #endif
-	
   ffi_cif   *cif;
   void     (*fun)(ffi_cif*,void*,void**,void*);
   void      *user_data;
@@ -421,14 +337,12 @@ ffi_prep_closure_loc (ffi_closure*,
 # pragma pack 8
 #endif
 typedef struct {
-
-#if TARGET_OS_MAC || TARGET_IPHONE_SIMULATOR
-  char tramp[FFI_TRAMPOLINE_SIZE];
-#else
+#if 0
   void *trampoline_table;
   void *trampoline_table_entry;
+#else
+  char tramp[FFI_TRAMPOLINE_SIZE];
 #endif
-
   ffi_cif   *cif;
 
 #if !FFI_NATIVE_RAW_API
@@ -448,12 +362,11 @@ typedef struct {
 } ffi_raw_closure;
 
 typedef struct {
-
-#if TARGET_OS_MAC || TARGET_IPHONE_SIMULATOR
-  char tramp[FFI_TRAMPOLINE_SIZE];
-#else
+#if 0
   void *trampoline_table;
   void *trampoline_table_entry;
+#else
+  char tramp[FFI_TRAMPOLINE_SIZE];
 #endif
 
   ffi_cif   *cif;
@@ -534,13 +447,11 @@ void ffi_call(ffi_cif *cif,
 #define FFI_TYPE_INT        1
 #define FFI_TYPE_FLOAT      2    
 #define FFI_TYPE_DOUBLE     3
-
-#if TARGET_OS_MAC || TARGET_IPHONE_SIMULATOR
+#if 1
 #define FFI_TYPE_LONGDOUBLE 4
 #else
 #define FFI_TYPE_LONGDOUBLE FFI_TYPE_DOUBLE
 #endif
-
 #define FFI_TYPE_UINT8      5   
 #define FFI_TYPE_SINT8      6
 #define FFI_TYPE_UINT16     7 
@@ -558,5 +469,8 @@ void ffi_call(ffi_cif *cif,
 #ifdef __cplusplus
 }
 #endif
+
+#endif
+
 
 #endif

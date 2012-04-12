@@ -1,3 +1,5 @@
+#if !defined(__i386__) && defined(__x86_64__)
+
 /* -----------------------------------------------------------------------
    darwin64.S - Copyright (c) 2006 Free Software Foundation, Inc.
 	        Copyright (c) 2008 Red Hat, Inc.
@@ -26,10 +28,9 @@
    ----------------------------------------------------------------------- */
 
 #ifdef __x86_64__
-
 #define LIBFFI_ASM
-#include "fficonfig.h"
-#include "ffi.h"
+#include <fficonfig.h>
+#include <ffi.h>
 
 	.file "darwin64.S"
 .text
@@ -415,3 +416,6 @@ LEFDE3:
 	.subsections_via_symbols
 
 #endif /* __x86_64__ */
+
+
+#endif

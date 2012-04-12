@@ -30,8 +30,8 @@
 #define _GNU_SOURCE 1
 #endif
 
-#include "ffi.h"
-#include "ffi_common.h"
+#include <ffi.h>
+#include <ffi_common.h>
 
 #if !FFI_MMAP_EXEC_WRIT && !FFI_EXEC_TRAMPOLINE_TABLE
 # if __gnu_linux__

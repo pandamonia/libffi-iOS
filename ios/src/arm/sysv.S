@@ -1,3 +1,5 @@
+#ifdef __arm__
+
 /* -----------------------------------------------------------------------
    sysv.S - Copyright (c) 1998, 2008, 2011 Red Hat, Inc.
 	    Copyright (c) 2011 Plausible Labs Cooperative, Inc.
@@ -25,12 +27,9 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#if defined (__arm) || defined (__arm__)
-
 #define LIBFFI_ASM	
-#include "fficonfig.h"
-#include "ffi.h"
-
+#include <fficonfig.h>
+#include <ffi.h>
 #ifdef HAVE_MACHINE_ASM_H
 #include <machine/asm.h>
 #else
@@ -506,5 +505,6 @@ ENTRY(ffi_arm_trampoline)
 #if defined __ELF__ && defined __linux__
 	.section	.note.GNU-stack,"",%progbits
 #endif
+
 
 #endif

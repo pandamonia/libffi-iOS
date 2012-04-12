@@ -12,5 +12,9 @@ Pod::Spec.new do |s|
                  'Zachary Waldowski' => 'zwaldowski@gmail.com' }
   s.source   = { :git => 'https://github.com/zwaldowski/libffi-iOS.git', :tag => 'v3.0.11' }
   s.clean_paths = 'patches/', 'libffi.xcodeproj/', '.gitignore'
-  s.source_files = 'include/*.h', 'src/*.c', 'src/arm/*.{c,S}', 'src/x86/*.{c,S}'
+  if config.ios?
+    s.source_files = 'ios/include/*.h', 'ios/src/arm/*.{c,S}', 'ios/src/x86/*.{c,S}', 'src/*.c'
+  else
+    s.source_files = 'osx/include/*.h', 'osx/src/x86/*.{c,S}', 'src/*.c'
+  end
 end

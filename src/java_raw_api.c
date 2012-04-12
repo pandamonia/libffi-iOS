@@ -35,8 +35,8 @@
 /* stack slots (longs, doubles) occupy 128 bits, but only the first	*/
 /* 64 bits are actually used.						*/
 
-#include "ffi.h"
-#include "ffi_common.h"
+#include <ffi.h>
+#include <ffi_common.h>
 #include <stdlib.h>
 
 #if !defined(NO_JAVA_RAW_API) && !defined(FFI_NO_RAW_API)

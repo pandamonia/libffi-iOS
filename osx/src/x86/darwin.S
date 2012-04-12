@@ -1,3 +1,5 @@
+#if !defined(__i386__) && defined(__x86_64__)
+
 /* -----------------------------------------------------------------------
    darwin.S - Copyright (c) 1996, 1998, 2001, 2002, 2003, 2005  Red Hat, Inc.
 	Copyright (C) 2008  Free Software Foundation, Inc.
@@ -26,12 +28,11 @@
    -----------------------------------------------------------------------
    */
 
-#if defined (__i386__) || defined(_WIN64)
+#ifndef __x86_64__
 
-#define LIBFFI_ASM
-
-#include "fficonfig.h"
-#include "ffi.h"
+#define LIBFFI_ASM	
+#include <fficonfig.h>
+#include <ffi.h>
 
 .text
 
@@ -260,7 +261,7 @@ _ffi_closure_SYSV:
 
 #if !FFI_NO_RAW_API
 
-#define RAW_CLOSURE_CIF_OFFSET ((10 + 3) & ~3)
+#define RAW_CLOSURE_CIF_OFFSET ((FFI_TRAMPOLINE_SIZE + 3) & ~3)
 #define RAW_CLOSURE_FUN_OFFSET (RAW_CLOSURE_CIF_OFFSET + 4)
 #define RAW_CLOSURE_USER_DATA_OFFSET (RAW_CLOSURE_FUN_OFFSET + 4)
 #define CIF_FLAGS_OFFSET 20
@@ -443,3 +444,6 @@ LEFDE3:
 #endif
 
 #endif /* ifndef __x86_64__ */
+
+
+#endif

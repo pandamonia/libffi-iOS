@@ -8,8 +8,6 @@ vararg_float_test_fix
 vfp-eabi
 msvc-changes
 win32-return-sign
-<<<<<<< HEAD
-=======
 apple-fixes
 dist-tests
 icc128
@@ -18,8 +16,5 @@ arm-test-fix
 xcode
 darwin-missing-semi
 xcode-improvements
-<<<<<<< HEAD
->>>>>>> 39e6a5860416f7bad992149817e1da1ba7c460d4
-=======
 update-disty
->>>>>>> 7e0a412c4fd9cbe77b467a9bf86f56aea62632c3
+v3_0_11

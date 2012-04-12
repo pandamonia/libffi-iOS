@@ -1,3 +1,5 @@
+#ifdef __arm__
+
 /* -----------------------------------------------------------------------
    ffi.c - Copyright (c) 2011 Timothy Wall
            Copyright (c) 2011 Plausible Labs Cooperative, Inc.
@@ -28,10 +30,8 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#if defined (__arm) || defined (__arm__)
-
-#include "ffi.h"
-#include "ffi_common.h"
+#include <ffi.h>
+#include <ffi_common.h>
 
 #include <stdlib.h>
 
@@ -756,5 +756,6 @@ static void layout_vfp_args (ffi_cif *cif)
 	place_vfp_arg (cif, t);
     }
 }
+
 
 #endif

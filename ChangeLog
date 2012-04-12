@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
 2012-04-11  Anthony Green  <green@moxielogic.com>
 
 	* Makefile.am (EXTRA_DIST): Add new script.
 	* Makefile.in: Rebuilt.
 
->>>>>>> 7e0a412c4fd9cbe77b467a9bf86f56aea62632c3
 2012-04-11  Zachary Waldowski  <zwaldowski@gmail.com>
 
 	* generate-ios-source-and-headers.py,
@@ -53,7 +48,6 @@
 	in CNAME.
 	* src/x86/ffi.c: Wrap Windows specific code in ifdefs.
 
->>>>>>> 39e6a5860416f7bad992149817e1da1ba7c460d4
 2012-04-02  Peter Rosin  <peda@lysator.liu.se>
 
 	* src/x86/win32.S (ffi_call_win32): Sign/zero extend the return

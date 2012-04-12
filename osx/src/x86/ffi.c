@@ -1,3 +1,5 @@
+#if !defined(__i386__) && defined(__x86_64__)
+
 /* -----------------------------------------------------------------------
    ffi.c - Copyright (c) 1996, 1998, 1999, 2001, 2007, 2008  Red Hat, Inc.
            Copyright (c) 2002  Ranjit Mathew
@@ -28,14 +30,14 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#if defined (__i386__) || defined(_WIN64)
+#if !defined(__x86_64__) || defined(_WIN64)
 
 #ifdef _WIN64
 #include <windows.h>
 #endif
 
-#include "ffi.h"
-#include "ffi_common.h"
+#include <ffi.h>
+#include <ffi_common.h>
 
 #include <stdlib.h>
 
@@ -841,3 +843,6 @@ ffi_raw_call(ffi_cif *cif, void (*fn)(void), void *rvalue, ffi_raw *fake_avalue)
 
 #endif /* !__x86_64__  || X86_WIN64 */
 
+
+
+#endif
