@@ -28,13 +28,13 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#ifdef __x86_64__
-
-#include "ffi.h"
-#include "ffi_common.h"
+#include <ffi.h>
+#include <ffi_common.h>
 
 #include <stdlib.h>
 #include <stdarg.h>
+
+#ifdef __x86_64__
 
 #define MAX_GPR_REGS 6
 #define MAX_SSE_REGS 8

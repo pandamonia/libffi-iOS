@@ -1,4 +1,4 @@
-#if defined(__i386__) && !defined(__x86_64__)
+#if !defined(__i386__) && defined(__x86_64__)
 
 /* -----------------------------------------------------------------------
    ffi.c - Copyright (c) 1996, 1998, 1999, 2001, 2007, 2008  Red Hat, Inc.
@@ -36,8 +36,8 @@
 #include <windows.h>
 #endif
 
-#include "ffi.h"
-#include "ffi_common.h"
+#include <ffi.h>
+#include <ffi_common.h>
 
 #include <stdlib.h>
 
