@@ -38,6 +38,7 @@
 /* Forward declares. */
 static int vfp_type_p (ffi_type *);
 static void layout_vfp_args (ffi_cif *);
+int ffi_prep_args(char *stack, extended_cif *ecif, float *vfp_space);
 
 /* ffi_prep_args is called by the assembly routine once stack space
    has been allocated for the function's arguments
@@ -276,6 +277,8 @@ static void ffi_prep_incoming_args_SYSV (char *stack, void **ret,
 void ffi_closure_SYSV (ffi_closure *);
 
 void ffi_closure_VFP (ffi_closure *);
+
+unsigned int ffi_closure_SYSV_inner (ffi_closure *closure, void **respp, void *args, void *vfp_args);
 
 /* This function is jumped to by the trampoline */
 
