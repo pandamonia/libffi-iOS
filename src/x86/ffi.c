@@ -28,14 +28,14 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#if !defined(__x86_64__) || defined(_WIN64)
+#if defined (__i386__) || defined(_WIN64)
 
 #ifdef _WIN64
 #include <windows.h>
 #endif
 
-#include <ffi.h>
-#include <ffi_common.h>
+#include "ffi.h"
+#include "ffi_common.h"
 
 #include <stdlib.h>
 

@@ -24,6 +24,8 @@
 #  DEALINGS IN THE SOFTWARE.
 #  -----------------------------------------------------------------------
 
+#if defined (__arm) || defined (__arm__)
+
 .text
 .align 12
 .globl _ffi_closure_trampoline_table_page
@@ -4448,3 +4450,4 @@ _ffi_closure_trampoline_table_page:
     // Load the jump address from the config page.
     ldr pc, [pc, #-4092]
 
+#endif

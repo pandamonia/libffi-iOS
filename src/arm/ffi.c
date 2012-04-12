@@ -28,8 +28,10 @@
    DEALINGS IN THE SOFTWARE.
    ----------------------------------------------------------------------- */
 
-#include <ffi.h>
-#include <ffi_common.h>
+#if defined (__arm) || defined (__arm__)
+
+#include "ffi.h"
+#include "ffi_common.h"
 
 #include <stdlib.h>
 
@@ -754,3 +756,5 @@ static void layout_vfp_args (ffi_cif *cif)
 	place_vfp_arg (cif, t);
     }
 }
+
+#endif
