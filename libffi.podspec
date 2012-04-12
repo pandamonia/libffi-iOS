@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                  'Bo Thorsen' => 'bo@suse.de',
                  'Landon Fuller' => 'landonf@plausible.coop',
                  'Zachary Waldowski' => 'zwaldowski@gmail.com' }
-  s.source   = { :git => 'https://github.com/zwaldowski/libffi-iOS.git', :tag => 'origin/master' }
+  s.source   = { :git => 'https://github.com/zwaldowski/libffi-iOS.git', :tag => 'v3.0.11' }
   s.clean_paths = 'patches/', 'libffi.xcodeproj/', '.gitignore'
   if config.ios?
     s.source_files = 'ios/include/*.h', 'ios/src/arm/*.{c,S}', 'ios/src/x86/{ffi.c,darwin.S}', 'src/{closures,debug,java_raw_api,prep_cif,raw_api,types}.c'
