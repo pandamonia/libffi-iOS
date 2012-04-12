@@ -1,24 +1,16 @@
 Pod::Spec.new do |s|
-  s.name     = 'BlocksKit'
-  s.version  = '1.0.6'
+  s.name     = 'libffi'
+  s.version  = '3.0.11'
   s.license  = 'MIT'
-  s.summary  = 'The Objective-C block utilities you always wish you had.'
-  s.homepage = 'https://github.com/zwaldowski/BlocksKit'
-  s.author   = { 'Zachary Waldowski' => 'zwaldowski@gmail.com',
-                 'Alexsander Akers' => 'a2@pandamonia.us' }
-  s.source   = { :git => 'https://github.com/zwaldowski/BlocksKit.git', :tag => 'v1.0.6' }
-  s.dependency 'A2DynamicDelegate'
-  s.clean_paths = 'GHUnitIOS.framework/', 'Tests/', 'BlocksKit.xcodeproj/', '.gitignore'
-  if config.ios?
-    s.frameworks   = 'MessageUI'
-    s.source_files = 'BlocksKit/*.{h,m}', 'BlocksKit/UIKit/*.{h,m}', 'BlocksKit/MessageUI/*.{h,m}'
-  else
-    s.source_files = 'BlocksKit/*.{h,m}'
-  end
-  def s.post_install(target)
-    prefix_header = config.project_pods_root + target.prefix_header_filename
-    prefix_header.open('a') do |file|
-      file.puts(%{#ifdef __OBJC__\n#import "BlocksKit.h"\n#endif})
-    end
-  end
+  s.summary  = 'A portable foreign-function interface library.'
+  s.homepage = 'http://sourceware.org/libffi/'
+  s.author   = { 'Anthony Green', 'green@moxielogic.com',
+                 'Raffaele Sena' => 'aff367@gmail.com',
+                 'Jon Beniston' => 'jon@beniston.com',
+                 'Bo Thorsen' => 'bo@suse.de',
+                 'Landon Fuller' => 'landonf@plausible.coop',
+                 'Zachary Waldowski' => 'zwaldowski@gmail.com' }
+  s.source   = { :git => 'https://github.com/zwaldowski/libffi-iOS.git', :tag => 'v3.0.11' }
+  s.clean_paths = 'patches/', 'libffi.xcodeproj/', '.gitignore'
+  s.source_files = 'include/*.h', 'src/*.c', 'src/arm/*.{c,S}', 'src/x86/*.{c,S}'
 end
