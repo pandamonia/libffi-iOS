@@ -8,3 +8,14 @@ vararg_float_test_fix
 vfp-eabi
 msvc-changes
 win32-return-sign
+<<<<<<< HEAD
+=======
+apple-fixes
+dist-tests
+icc128
+x32libtool
+arm-test-fix
+xcode
+darwin-missing-semi
+xcode-improvements
+>>>>>>> 39e6a5860416f7bad992149817e1da1ba7c460d4
