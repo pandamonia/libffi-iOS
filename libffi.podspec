@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.license  = 'MIT'
   s.summary  = 'A portable foreign-function interface library.'
   s.homepage = 'http://sourceware.org/libffi/'
-  s.author   = { 'Anthony Green', 'green@moxielogic.com',
+  s.author   = { 'Anthony Green' => 'green@moxielogic.com',
                  'Raffaele Sena' => 'aff367@gmail.com',
                  'Jon Beniston' => 'jon@beniston.com',
                  'Bo Thorsen' => 'bo@suse.de',
