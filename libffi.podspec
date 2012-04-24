@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
   else
     s.source_files = 'osx/include/*.h', 'osx/src/x86/{darwin.S,darwin64.S,ffi.c,ffi64.c}', 'src/{closures,prep_cif,raw_api,types}.c'
   end
+  s.xcconfig    = { 'OTHER_LDFLAGS' => "-Wl,-no_compact_unwind" }
 end
