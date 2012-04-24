@@ -109,44 +109,31 @@
 #define UNWIND
 #else
 #define UNWIND @
-#endif	
+#endif
+
+.syntax unified
 
 	
 #if defined(__thumb__) && !defined(__THUMB_INTERWORK__)
-.macro	ARM_FUNC_START name
-	.text
-	.align 0
-	.thumb
-	.thumb_func
-#ifdef __APPLE__
-	ENTRY($0)
-#else
-	ENTRY(\name)
-#endif
-	bx	pc
-	nop
-	.arm
-	UNWIND .fnstart
-/* A hook to tell gdb that we've switched to ARM mode.  Also used to call
-   directly from other local arm routines.  */
-#ifdef __APPLE__
-_L__$0:
-#else
-_L__\name:
-#endif
+#define ARM_FUNC_START(name) \
+	.text; \
+	.align 0; \
+	.thumb; \
+	.thumb_func; \
+	ENTRY(name); \
+	bx pc; \
+	nop; \
+	.arm; \
+	UNWIND .fnstart; \
+_L__##name: \
 .endm
 #else
-.macro	ARM_FUNC_START name
-	.text
-	.align 0
-	.arm
-#ifdef __APPLE__
-	ENTRY($0)
-#else
-	ENTRY(\name)
-#endif
+#define ARM_FUNC_START(name) \
+	.text; \
+	.align 0; \
+	.arm; \
+	ENTRY(name); \
 	UNWIND .fnstart
-.endm
 #endif
 
 .macro	RETLDM
@@ -165,7 +152,7 @@ _L__\name:
 	@ sp+0: ecif.rvalue
 
 	@ This assumes we are using gas.
-ARM_FUNC_START ffi_call_SYSV
+ARM_FUNC_START(ffi_call_SYSV)
 	@ Save registers
         stmfd	sp!, {r0-r3, fp, lr}
 	UNWIND .save	{r0-r3, fp, lr}
@@ -222,7 +209,7 @@ ARM_FUNC_START ffi_call_SYSV
 #if defined(__SOFTFP__) || defined(__ARM_EABI__)
 	cmpne	r3, #FFI_TYPE_DOUBLE
 #endif
-	stmeqia	r2, {r0, r1}
+	stmiaeq	r2, {r0, r1}
 
 #if !defined(__SOFTFP__) && !defined(__ARM_EABI__)
 	beq	LSYM(Lepilogue)
@@ -260,7 +247,7 @@ LSYM(Lepilogue):
   	     void *args;
 */
 
-ARM_FUNC_START ffi_closure_SYSV
+ARM_FUNC_START(ffi_closure_SYSV)
 	UNWIND .pad #16
 	add	ip, sp, #16
 	stmfd	sp!, {ip, lr}
@@ -404,7 +391,7 @@ LSYM(Lbase_args):
 	beq	LSYM(Lepilogue_vfp)
 
 	cmp	r3, #FFI_TYPE_SINT64
-	stmeqia	r2, {r0, r1}
+	stmiaeq	r2, {r0, r1}
 	beq	LSYM(Lepilogue_vfp)
 
 	cmp	r3, #FFI_TYPE_FLOAT
