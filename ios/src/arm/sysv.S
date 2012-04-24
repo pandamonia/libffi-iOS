@@ -117,7 +117,7 @@
 #if defined(__thumb__) && !defined(__THUMB_INTERWORK__)
 #define ARM_FUNC_START(name) \
 	.text; \
-	.align 0; \
+	.align 4; \
 	.thumb; \
 	.thumb_func; \
 	ENTRY(name); \
@@ -130,7 +130,7 @@ _L__##name: \
 #else
 #define ARM_FUNC_START(name) \
 	.text; \
-	.align 0; \
+	.align 4; \
 	.arm; \
 	ENTRY(name); \
 	UNWIND .fnstart
